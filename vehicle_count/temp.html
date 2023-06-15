@@ -1,0 +1,107 @@
+< !DOCTYPE html>
+    <html lang="en">
+
+        <head>
+            <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+            <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+            <title>React App</title>
+        </head>
+
+        <body>
+            <div id="root"></div>
+
+            <script type="text/babel">
+                let carCount = 0;
+                let bikeCount = 0;
+                let scootyCount = 0;
+                let bicycleCount = 0;
+
+                function increaseC() {
+                    carCount++;
+                    rootElement.render(<App />);
+                }
+                function decreaseC() {
+                    if(carCount>0)
+                    carCount--
+                    rootElement.render(<App />);
+                }
+
+                function increaseB() {
+                    bikeCount++
+                    rootElement.render(<App />);
+                }
+                function decreaseB() {
+                    if (bikeCount > 0)
+                        bikeCount--
+                        rootElement.render(<App />);
+                    
+                }
+                function increaseS() {
+                    scootyCount++
+                    rootElement.render(<App />);
+                }
+                function decreaseS() {
+                    if(scootyCount>0)
+                    scootyCount--
+                    rootElement.render(<App />);
+                }
+                function increaseBi() {
+                    bicycleCount++;
+
+                    rootElement.render(<App />);
+                }
+                function decreaseBi() {
+                    if(bicycleCount>0)
+                    bicycleCount--;
+                    rootElement.render(<App />);
+                }
+                const App = () => (
+                    <>
+                        <p>List of all the vehicles count in the parking.</p>
+                        <ol>
+                            <li>
+                                <p>
+                                    <b>Car: {carCount}</b> &emsp;
+                                    <button onClick={increaseC} >Increase</button>
+                                    &nbsp; &nbsp;
+                                    <button onClick={decreaseC} >Decrease</button>
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Bike: {bikeCount}</b> &emsp;
+                                    <button onClick={increaseB} >Increase</button>
+                                    &nbsp; &nbsp;
+                                    <button onClick={decreaseB} >Decrease</button>               </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Scooty: {scootyCount}</b> &emsp;
+                                    <button onClick={increaseS} >Increase</button>
+                                    &nbsp; &nbsp;
+                                    <button onClick={decreaseS} >Decrease</button>               </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Bicycle: {bicycleCount}</b> &emsp;
+                                    <button onClick={increaseBi} >Increase</button>
+                                    &nbsp; &nbsp;
+                                    <button onClick={decreaseBi} >Decrease</button>               </p>
+                            </li>
+                        </ol>
+                    </>
+                );
+
+                const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+                rootElement.render(<App />);
+            </script>
+        </body>
+
+    </html>
+
+
+    const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+    rootElement.render(
+    <App />);

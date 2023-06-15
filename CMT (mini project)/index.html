@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <title>React App</title>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            let customers = [];
+            const capacity = 25;
+            let seatsLeft = 25;
+
+            let guestCount = React.createRef();
+            let guestP_name = React.createRef();
+            let phone = React.createRef();
+
+            function render() {
+                ReactDOM.render(<App />, document.getElementById("root"));
+            }
+
+            function handleCheckout(event, index) {
+                event.preventDefault();
+                let currentTime = new Date().toLocaleTimeString();
+                customers[index].checkout = currentTime;
+                render();
+            }
+
+            function handleDelete(event, index) {
+                event.preventDefault();
+                customers.splice(index, 1);
+                render();
+            }
+
+            function addCheckout() {
+                let currentTime = new Date().toLocaleTimeString();
+                console.log(currentTime);
+                customers.push({
+                    name: guestP_name.current.value,
+                    phone: phone.current.value,
+                    count: guestCount.current.value,
+                    checkin: currentTime,
+                    checkout: ""
+                });
+            }
+
+
+            function processFunction(event) {
+                event.preventDefault();
+                if (seatsLeft > 0 && seatsLeft >= guestCount.current.value) {
+                    addCheckout();
+                    seatsLeft -= guestCount.current.value;
+                }
+
+
+                guestCount.current.value = "";
+                guestP_name.current.value = "";
+                phone.current.value = "";
+
+                render();
+            }
+
+            const Result = () => <>
+                <thead>
+                    <tr>
+                        <th>Count</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Status</th>
+                        <th>Remove Entry</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {customers.map((res, index) => (
+                        <tr key={index}>
+                            <td>{res.count}</td>
+                            <td>{res.name}</td>
+                            <td>{res.phone}</td>
+                            <td>{res.checkin}</td>
+                            <td>{res.checkout}</td>
+                            <td>{res.checkout ? "Served" : (<button onClick={(event) => handleCheckout(event, index)}>Click to Checkout</button>)}</td>
+                            <td><button onClick={(event) => handleDelete(event, index)}>Delete</button></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </>;
+
+            const Form = () => (
+                <form onSubmit={(event) => processFunction(event)}>
+                    <input type="number" ref={guestCount} placeholder="Guests Count" /><br />
+                    <input ref={guestP_name} placeholder="Primary Guest Name" /><br />
+                    <input type="tel" ref={phone} placeholder="Phone Number" /><br />
+                    <button>Add Entry</button>
+                </form>
+            )
+
+            const App = () => (
+                <div className="App" style={{ textAlign: "center" }}>
+                    <div>
+                        <h2>Total Capacity: {capacity}</h2>
+                        <h2>Seats Left: {seatsLeft}</h2>
+                    </div>
+
+                    <Form />
+                    <table border="1px" style={{ margin: "auto" }}>
+                        <Result />
+                    </table>
+                </div>
+            );
+            console.log(customers.length);
+            const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+            rootElement.render(<App />);
+        </script>
+    </body>
+
+</html>
