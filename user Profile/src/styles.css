@@ -1,0 +1,39 @@
+/* Write code for your CSS here */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 30px;
+}
+
+#root {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f9;
+}
+
+.conatiner {
+    width: 60%;
+    padding: 50px;
+    background-color: white;
+}
+
+.skills {
+    margin: 40px 0;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.skills ul li {
+    display: inline-block;
+    background-color: aqua;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
