@@ -1,0 +1,23 @@
+.card {
+  width: 60%;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: cyan;
+  animation: hue-rotate 1s infinite ease;
+}
+
+@keyframes hue-rotate {
+  0% {
+   background-color: aqua;
+  }
+  33.33%{
+    background-color: red;
+  }
+  66.66% {
+    background-color: indigo;
+  }
+  100% {
+    background-color: cyan;
+  }
+}
